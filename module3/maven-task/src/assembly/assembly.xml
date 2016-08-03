@@ -1,12 +1,12 @@
 <assembly>
         <formats>
-        <format>tar</format>
+        <format>zip</format>
         </formats>
         <fileSets>
                 <fileSet>
                         <includes>
-<include>/target/${project.artifactId}-${project.version}.jar</include>
-<include>/src/main/resources/*</include>
+				<include>/target/${project.artifactId}-${project.version}.jar</include>
+				<include>/src/main/resources/*</include>
                         </includes>
                 </fileSet>
         </fileSets>
