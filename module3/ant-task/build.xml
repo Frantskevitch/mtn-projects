@@ -33,11 +33,11 @@
             </batchtest>
      </junit>
 </target>
-<target name="dist" depends="test">
+<target name="jar" depends="test">
    <echo>make jar</echo>
     <jar jarfile="${dist}/lib/myproject.jar" basedir="${build}"/>
 </target>
-<target name="zip" depends="dist">
+<target name="dist" depends="jar">
 <echo>making archive</echo>
 <zip destfile="${dist}/built:${time}.zip" basedir="${dist}"/>
 </target>
