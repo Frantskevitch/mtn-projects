@@ -1,0 +1,44 @@
+<project name="task3" default="zip" basedir=".">
+
+<property file="config/project.properties"/>
+
+<target name="clear">
+<delete dir="${build}"/>
+<delete dir="${dist}"/>
+</target>
+
+<target name="init" depends="clear">
+<echo>creating build dir</echo>
+<mkdir dir="${build}"/>
+<mkdir dir="${dist}/lib"/>
+<tstamp>
+    <format property="time" pattern="dd-MM-yyyy mm:hh"/>
+</tstamp>
+
+</target>
+
+<target name="compile" depends="init">
+<echo>compiling</echo>
+<javac srcdir="${src}" destdir="${build}" classpath="lib/commons-collections-3.2.1.jar"/>
+</target>
+
+<target name="test" depends="compile">
+  <echo>Testing</echo>
+    <junit printsummary="on">
+	    <classpath>
+                <pathelement location="lib/junit-4.11.jar"/>      
+            </classpath>
+            <batchtest fork="yes">
+                <fileset dir="${src.test}" includes="**/*Test*.java"/>
+            </batchtest>
+     </junit>
+</target>
+<target name="dist" depends="test">
+   <echo>make jar</echo>
+    <jar jarfile="${dist}/lib/myproject.jar" basedir="${build}"/>
+</target>
+<target name="zip" depends="dist">
+<echo>making archive</echo>
+<zip destfile="${dist}/built:${time}.zip" basedir="${dist}"/>
+</target>
+</project>
